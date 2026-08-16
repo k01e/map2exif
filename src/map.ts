@@ -49,7 +49,8 @@ function setLocation(location: LatLng): void {
 }
 
 export function initMap(): void {
-  map = L.map('map').setView([20, 0], 2);
+  map = L.map('map', { zoomControl: false }).setView([20, 0], 2);
+  L.control.zoom({ position: 'bottomright' }).addTo(map);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',

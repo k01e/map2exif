@@ -4,8 +4,9 @@
     {
       "name": "map2exif-dev",
       "runtimeExecutable": "bash",
-      "runtimeArgs": ["-lc", "npm run dev -- --host"],
-      "port": 5173
+      "runtimeArgs": ["-lc", "npm run dev -- --host --port \"${PORT:-5173}\" --strictPort"],
+      "port": 5173,
+      "autoPort": true
     }
   ]
 }

@@ -67,11 +67,19 @@ function renderThumbnails(items: PhotoItem[], container: HTMLUListElement): void
   container.innerHTML = '';
   for (const item of items) {
     const li = document.createElement('li');
-    li.className = 'thumbnail-item';
+    li.className = 'thumbnail-card';
 
     const img = document.createElement('img');
+    img.className = 'thumbnail-img';
     img.src = item.currentDataUrl;
     img.alt = item.file.name;
+
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'thumbnail-remove';
+    removeBtn.textContent = '×';
+    removeBtn.setAttribute('aria-label', `Remove ${item.file.name}`);
+    removeBtn.addEventListener('click', () => removePhoto(item.id));
 
     const meta = document.createElement('div');
     meta.className = 'thumbnail-meta';
@@ -91,24 +99,14 @@ function renderThumbnails(items: PhotoItem[], container: HTMLUListElement): void
       gpsStatus.textContent = 'No location set';
     }
 
-    const actions = document.createElement('div');
-    actions.className = 'thumbnail-actions';
-
     const downloadBtn = document.createElement('button');
     downloadBtn.type = 'button';
     downloadBtn.className = 'thumbnail-download';
     downloadBtn.textContent = 'Download';
     downloadBtn.addEventListener('click', () => downloadSingle(item));
 
-    const removeBtn = document.createElement('button');
-    removeBtn.type = 'button';
-    removeBtn.className = 'thumbnail-remove';
-    removeBtn.textContent = 'Remove';
-    removeBtn.addEventListener('click', () => removePhoto(item.id));
-
-    actions.append(downloadBtn, removeBtn);
-    meta.append(name, gpsStatus);
-    li.append(img, meta, actions);
+    meta.append(name, gpsStatus, downloadBtn);
+    li.append(img, removeBtn, meta);
     container.appendChild(li);
   }
 }

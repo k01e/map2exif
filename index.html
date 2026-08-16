@@ -8,46 +8,60 @@
   <body>
     <div id="app">
       <header class="app-header">
-        <h1>map2exif</h1>
-        <p class="tagline">
-          Upload JPEGs, pick a spot on the map, write it into the photos' EXIF GPS data. Everything happens in your
-          browser &mdash; your photos are never uploaded anywhere. The map may ask to use your location just to
-          center itself near you; declining is fine and only changes the starting view.
-        </p>
+        <div class="brand">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="brand-name">map2exif</span>
+        </div>
+        <p class="tagline">Add EXIF location data to photos taken before devices had GPS.</p>
       </header>
 
       <main class="layout">
-        <section class="panel upload-panel">
-          <h2>1. Photos</h2>
-          <div id="dropzone" class="dropzone">
-            <p>Drag &amp; drop JPEGs here, or</p>
-            <label class="file-picker-label">
-              <span>Choose files</span>
-              <input id="file-input" type="file" accept="image/jpeg" multiple />
-            </label>
+        <section class="section map-panel">
+          <h2>Step 1 &middot; Pick a location</h2>
+          <div class="map-card">
+            <div id="map"></div>
+
+            <div class="map-search">
+              <div class="search-pill">
+                <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
+                  <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                </svg>
+                <input id="search-input" type="text" placeholder="Search an address or place&hellip;" autocomplete="off" />
+                <button id="search-button" type="button">Search</button>
+              </div>
+            </div>
+
+            <p id="selected-location" class="selected-location">No location selected &mdash; click the map.</p>
           </div>
-          <ul id="thumbnail-list" class="thumbnail-list"></ul>
         </section>
 
-        <section class="panel map-panel">
-          <h2>2. Location</h2>
-          <div class="search-row">
-            <input id="search-input" type="text" placeholder="Search for an address or place&hellip;" autocomplete="off" />
-            <button id="search-button" type="button">Search</button>
+        <section class="section upload-panel">
+          <div class="section-header-row">
+            <h2>Step 2 &middot; Upload photos</h2>
+            <span id="photo-count" class="photo-count">None yet</span>
           </div>
-          <div id="map"></div>
-          <p id="selected-location" class="selected-location">No location selected yet &mdash; search above or click the map.</p>
+          <div id="dropzone" class="photo-strip">
+            <label class="file-picker-tile">
+              <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"></rect>
+                <circle cx="9" cy="9" r="1.6" fill="currentColor"></circle>
+                <path d="M4 17l5-5 4 4 3-3 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>Drop JPEGs<br />or browse</span>
+              <input id="file-input" type="file" accept="image/jpeg" multiple />
+            </label>
+            <ul id="thumbnail-list" class="thumbnail-list"></ul>
+          </div>
         </section>
       </main>
 
-      <section class="panel action-panel">
-        <h2>3. Apply &amp; download</h2>
-        <div class="action-row">
-          <button id="apply-button" type="button" disabled>Apply location to all photos</button>
-          <button id="download-zip-button" type="button" disabled>Download all as ZIP</button>
-        </div>
-        <p id="status-message" class="status-message"></p>
-      </section>
+      <footer class="action-footer">
+        <button id="apply-button" type="button" disabled>Apply location to 0 photo(s)</button>
+        <button id="download-zip-button" type="button" disabled>Download all as ZIP</button>
+        <span id="status-message" class="status-message"></span>
+        <span class="privacy-note">Everything happens in your browser &mdash; photos are never uploaded.</span>
+      </footer>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
