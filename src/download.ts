@@ -12,7 +12,16 @@ export async function downloadAllAsZip(items: PhotoItem[]): Promise<void> {
     zip.file(item.file.name, dataUrlToBlob(item.currentDataUrl));
   }
   const blob = await zip.generateAsync({ type: 'blob' });
-  triggerDownload(blob, 'map2exif-photos.zip');
+  triggerDownload(blob, `map2exif-${timestamp()}.zip`);
+}
+
+/** Local date/time formatted for use in a filename, e.g. "2026-08-16-142530". */
+function timestamp(): string {
+  const now = new Date();
+  const pad = (n: number): string => String(n).padStart(2, '0');
+  const date = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+  const time = `${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+  return `${date}-${time}`;
 }
 
 function triggerDownload(blob: Blob, filename: string): void {
