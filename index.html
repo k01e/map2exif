@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>map2exif</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="app-header">
+        <h1>map2exif</h1>
+        <p class="tagline">
+          Upload JPEGs, pick a spot on the map, write it into the photos' EXIF GPS data. Everything happens in your
+          browser &mdash; your photos are never uploaded anywhere.
+        </p>
+      </header>
+
+      <main class="layout">
+        <section class="panel upload-panel">
+          <h2>1. Photos</h2>
+          <div id="dropzone" class="dropzone">
+            <p>Drag &amp; drop JPEGs here, or</p>
+            <label class="file-picker-label">
+              <span>Choose files</span>
+              <input id="file-input" type="file" accept="image/jpeg" multiple />
+            </label>
+          </div>
+          <ul id="thumbnail-list" class="thumbnail-list"></ul>
+        </section>
+
+        <section class="panel map-panel">
+          <h2>2. Location</h2>
+          <div class="search-row">
+            <input id="search-input" type="text" placeholder="Search for an address or place&hellip;" autocomplete="off" />
+            <button id="search-button" type="button">Search</button>
+          </div>
+          <div id="map"></div>
+          <p id="selected-location" class="selected-location">No location selected yet &mdash; search above or click the map.</p>
+        </section>
+      </main>
+
+      <section class="panel action-panel">
+        <h2>3. Apply &amp; download</h2>
+        <div class="action-row">
+          <button id="apply-button" type="button" disabled>Apply location to all photos</button>
+          <button id="download-zip-button" type="button" disabled>Download all as ZIP</button>
+        </div>
+        <p id="status-message" class="status-message"></p>
+      </section>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
