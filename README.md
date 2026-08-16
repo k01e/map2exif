@@ -1,6 +1,6 @@
 # map2exif
 
-Upload JPEG photos, pick a location on a map, and write that location into the photos' EXIF GPS tags — right in your browser. No backend, no accounts, no photo ever leaves your machine.
+Lots of photos — old scans, hand-me-down family archives, shots from cameras and early phones that predate GPS-tagged EXIF data — have no location info baked in. map2exif lets you fill that in after the fact: upload JPEG photos, pick a location on a map, and write that location into the photos' EXIF GPS tags — right in your browser. No backend, no accounts, no photo ever leaves your machine.
 
 ## How it works
 
