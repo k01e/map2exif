@@ -80,7 +80,7 @@ function centerOnBrowserLocation(): void {
   if (!('geolocation' in navigator)) return;
   navigator.geolocation.getCurrentPosition(
     (position) => {
-      map.setView([position.coords.latitude, position.coords.longitude], 12);
+      map.setView([position.coords.latitude, position.coords.longitude], 9);
     },
     () => {
       // Permission denied, timed out, or unavailable — keep the default world view.
