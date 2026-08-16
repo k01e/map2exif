@@ -70,6 +70,22 @@ export function initMap(): void {
       runSearch();
     }
   });
+
+  centerOnBrowserLocation();
+}
+
+/** Best-effort recenter near the visitor on load; silently does nothing if unsupported/denied. */
+function centerOnBrowserLocation(): void {
+  if (!('geolocation' in navigator)) return;
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      map.setView([position.coords.latitude, position.coords.longitude], 12);
+    },
+    () => {
+      // Permission denied, timed out, or unavailable — keep the default world view.
+    },
+    { timeout: 8000, maximumAge: 10 * 60 * 1000 },
+  );
 }
 
 async function search(query: string): Promise<void> {
